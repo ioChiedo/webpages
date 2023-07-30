@@ -5,6 +5,8 @@ See: https://docs.github.com/en/pages/quickstart
 In order to update the pages, just push the modifications to the branch 
 main (to change it, go to https://github.com/ioChiedo/webpages/settings)
 
+> git push origin main
+
 Basically each page is served from a different directory, which contains 
 an index.html file.
 
