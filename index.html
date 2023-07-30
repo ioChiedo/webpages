@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Index Page</title>
+</head>
+<body>
+    <h1>List of Pages</h1>
+    <div id="pageListContainer"></div>
+</body>
+</html>
+
+<script>
+    // Function to fetch repository contents from GitHub API
+    async function fetchRepositoryContents() {
+        const response = await 
+fetch('https://api.github.com/repos/YourUserName/YourRepoName/contents');
+        const data = await response.json();
+        return data;
+    }
+
+    // Function to build the list of links and insert them into the 
+container
+    async function buildPageList() {
+        const container = document.getElementById('pageListContainer');
+        const repositoryContents = await fetchRepositoryContents();
+        let listHTML = '<ul>';
+        for (const item of repositoryContents) {
+            if (item.type === 'file' && item.name.endsWith('.html')) {
+                const pathParts = item.path.split('/');
+                const pageName = pathParts[pathParts.length - 
+1].replace('.html', '');
+                const linkHTML = `<li><a 
+href="${item.html_url}">${pageName}</a></li>`;
+                listHTML += linkHTML;
+            }
+        }
+        listHTML += '</ul>';
+        container.innerHTML = listHTML;
+    }
+
+    // Call the function to build the page list when the page loads
+    buildPageList();
+</script>
