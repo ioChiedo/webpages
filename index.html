@@ -3,13 +3,12 @@
 <head>
     <title>Index Page</title>
 </head>
-<body>
+<body onload="buildPageList();">
     <h1>List of Pages</h1>
     <div id="pageListContainer"></div>
-</body>
-</html>
 
-<script>
+
+    <script>
     // Function to fetch repository contents from GitHub API
     async function fetchRepositoryContents() {
         const response = await 
@@ -21,6 +20,7 @@ fetch('https://api.github.com/repos/davidecantini/webpages/contents');
     // Function to build the list of links and insert them into the 
 container
     async function buildPageList() {
+        console.log('Ok!');
         const container = document.getElementById('pageListContainer');
         const repositoryContents = await fetchRepositoryContents();
         let listHTML = '<ul>';
@@ -37,7 +37,8 @@ href="${item.html_url}">${pageName}</a></li>`;
         listHTML += '</ul>';
         container.innerHTML = listHTML;
     }
-
-    // Call the function to build the page list when the page loads
-    buildPageList();
 </script>
+
+</body>
+</html>
+
